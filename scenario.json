@@ -1,0 +1,45 @@
+{
+  "name": "Shabbat Host - two Fridays",
+  "today": null,
+  "compact_threshold_tokens": 6000,
+  "sessions": [
+    {
+      "id": 1,
+      "turns": [
+        "היי! ביום שישי הקרוב אני מארחת לארוחת שבת את נועה (טבעונית), אבא שלי יוסי (אלרגי לאגוזים) ודני. תשמור את האורחים בבקשה.",
+        "כמה דברים שחשוב לי שתזכור לתמיד: אני לא מכינה מנות שלוקחות יותר מ-90 דקות, הקינוח אצלי תמיד פרווה, ואם צפוי גשם אוכלים בפנים ולא במרפסת.",
+        "תציע לי תפריט לשישי הקרוב: מנה ראשונה, עיקרית, תוספת וקינוח, שיתאים לכולם. אם הכול תקין, תשמור אותו.",
+        "מתי כניסת שבת השבוע בגבעת שמואל, ומה מזג האוויר הצפוי בערב? לפי זה תגיד לי איפה לערוך את השולחן."
+      ]
+    },
+    {
+      "id": 2,
+      "turns": [
+        "חזרתי! בשישי שאחריו (שבוע הבא) מגיעים שוב אותם אורחים, ומצטרפת גם מיכל, שאוכלת ללא גלוטן. מה הגשתי בפעם הקודמת? לא בא לי לחזור על אותה עיקרית.",
+        "עדכון חשוב: נועה כבר לא טבעונית, היא צמחונית ואוכלת גבינות וביצים. וגם, מעכשיו מגבלת זמן ההכנה שלי היא 120 דקות ולא 90.",
+        "עכשיו תבנה ותשמור את התפריט לשבוע הבא. ולקינוח אני רוצה עוגת גבינה אפויה!"
+      ]
+    }
+  ],
+  "checks": [
+    {"id": "s1_guests_saved", "after_session": 1, "type": "guest_count_min", "n": 3, "desc": "3 guests on disk after session 1"},
+    {"id": "s1_noa_vegan", "after_session": 1, "type": "guest_restrictions", "guest": "נועה", "has": ["vegan"], "desc": "Noa saved as vegan"},
+    {"id": "s1_yossi_nuts", "after_session": 1, "type": "guest_restrictions", "guest": "יוסי", "has": ["nut-free"], "desc": "Yossi saved as nut-free"},
+    {"id": "s1_mem_prep_90", "after_session": 1, "type": "memory_value", "key": "pref.max_prep_minutes", "matches": "\\b90\\b", "desc": "memory: prep limit 90"},
+    {"id": "s1_mem_dessert", "after_session": 1, "type": "memory_value", "key": "pref.dessert", "matches": "פרווה|parve|pareve", "desc": "memory: dessert always parve"},
+    {"id": "s1_menu_valid", "after_session": 1, "type": "latest_menu_valid", "max_prep": 90, "desc": "a saved menu passes kashrut, every guest, <=90 min"},
+    {"id": "s1_external_used", "after_session": 1, "type": "tool_called", "tool": "shabbat_info", "session": 1, "desc": "external tool succeeded in session 1"},
+
+    {"id": "s2_recalls_prev_main", "after_session": 2, "type": "answer_mentions_menu_main", "turn": 5, "menu_index": 0, "desc": "session 2 answer names last week's main (cross-session recall)"},
+    {"id": "s2_noa_updated", "after_session": 2, "type": "guest_restrictions", "guest": "נועה", "has": ["vegetarian"], "lacks": ["vegan"], "desc": "contradiction: Noa vegan -> vegetarian overwritten"},
+    {"id": "s2_michal_gf", "after_session": 2, "type": "guest_restrictions", "guest": "מיכל", "has": ["gluten-free"], "desc": "new guest Michal saved as gluten-free"},
+    {"id": "s2_mem_prep_120", "after_session": 2, "type": "memory_value", "key": "pref.max_prep_minutes", "matches": "\\b120\\b", "not_matches": "\\b90\\b", "desc": "contradiction: prep limit 90 -> 120 overwritten"},
+    {"id": "s2_mem_dessert_kept", "after_session": 2, "type": "memory_value", "key": "pref.dessert", "matches": "פרווה|parve|pareve", "desc": "cheesecake request did NOT silently overwrite the parve rule"},
+    {"id": "s2_two_menus", "after_session": 2, "type": "menu_count_min", "n": 2, "desc": "second menu saved on a new date"},
+    {"id": "s2_menu_valid", "after_session": 2, "type": "latest_menu_valid", "max_prep": 120, "desc": "new menu valid for all 4 guests, <=120 min"},
+    {"id": "s2_menu_has_michal", "after_session": 2, "type": "latest_menu_has_guest", "guest": "מיכל", "desc": "Michal is on the new menu's guest list"},
+    {"id": "s2_main_differs", "after_session": 2, "type": "mains_differ", "desc": "main dish differs from last week"},
+    {"id": "s2_dessert_parve", "after_session": 2, "type": "latest_course_kinds", "course": "dessert", "kinds": ["parve"], "desc": "saved dessert is parve despite the cheesecake request"},
+    {"id": "s2_conflict_explained", "after_session": 2, "type": "answer_matches", "turn": 7, "regex": "פרווה|חלבי|בשרי", "desc": "turn 7 answer explains the conflict"}
+  ]
+}

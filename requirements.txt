@@ -1,0 +1,3 @@
+# Locked versions (same for every run; recorded in each results file)
+anthropic==1.0.0
+claude-agent-sdk==0.2.172

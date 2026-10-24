@@ -1,0 +1,525 @@
+{
+  "harness": "sdk",
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "versions": {
+    "locked": {
+      "anthropic": "1.0.0",
+      "claude-agent-sdk": "0.2.172"
+    },
+    "installed": {
+      "anthropic": "1.0.0",
+      "claude-agent-sdk": "0.2.172"
+    }
+  },
+  "run_at": "2026-10-24T22:33:47",
+  "totals": {
+    "input": 38,
+    "cache_read": 138580,
+    "cache_write": 12264,
+    "output": 5721,
+    "cache_hit_pct": 91.8,
+    "model_calls": 19,
+    "tool_calls": 23,
+    "cost_usd": 0.203608,
+    "seconds": 71.36
+  },
+  "checks_passed": "18/18",
+  "checks": [
+    {
+      "id": "s1_guests_saved",
+      "desc": "3 guests on disk after session 1",
+      "after_session": 1,
+      "passed": true,
+      "detail": "3 guests"
+    },
+    {
+      "id": "s1_noa_vegan",
+      "desc": "Noa saved as vegan",
+      "after_session": 1,
+      "passed": true,
+      "detail": "נועה restrictions=['vegan']"
+    },
+    {
+      "id": "s1_yossi_nuts",
+      "desc": "Yossi saved as nut-free",
+      "after_session": 1,
+      "passed": true,
+      "detail": "יוסי restrictions=['nut-free']"
+    },
+    {
+      "id": "s1_mem_prep_90",
+      "desc": "memory: prep limit 90",
+      "after_session": 1,
+      "passed": true,
+      "detail": "pref.max_prep_minutes='90'"
+    },
+    {
+      "id": "s1_mem_dessert",
+      "desc": "memory: dessert always parve",
+      "after_session": 1,
+      "passed": true,
+      "detail": "pref.dessert='הקינוח תמיד פרווה'"
+    },
+    {
+      "id": "s1_menu_valid",
+      "desc": "a saved menu passes kashrut, every guest, <=90 min",
+      "after_session": 1,
+      "passed": true,
+      "detail": "2026-10-30 ['s02', 'm03', 'm07', 'x04', 'd05'] issues=[]"
+    },
+    {
+      "id": "s1_external_used",
+      "desc": "external tool succeeded in session 1",
+      "after_session": 1,
+      "passed": true,
+      "detail": "1 successful calls"
+    },
+    {
+      "id": "s2_recalls_prev_main",
+      "desc": "session 2 answer names last week's main (cross-session recall)",
+      "after_session": 2,
+      "passed": true,
+      "detail": "mains=['פרגיות בסילאן ושומשום', 'קציצות עדשים ברוטב עגבניות'] mentioned=['פרגיות בסילאן ושומשום', 'קציצות עדשים ברוטב עגבניות']"
+    },
+    {
+      "id": "s2_noa_updated",
+      "desc": "contradiction: Noa vegan -> vegetarian overwritten",
+      "after_session": 2,
+      "passed": true,
+      "detail": "נועה restrictions=['vegetarian']"
+    },
+    {
+      "id": "s2_michal_gf",
+      "desc": "new guest Michal saved as gluten-free",
+      "after_session": 2,
+      "passed": true,
+      "detail": "מיכל restrictions=['gluten-free']"
+    },
+    {
+      "id": "s2_mem_prep_120",
+      "desc": "contradiction: prep limit 90 -> 120 overwritten",
+      "after_session": 2,
+      "passed": true,
+      "detail": "pref.max_prep_minutes='120'"
+    },
+    {
+      "id": "s2_mem_dessert_kept",
+      "desc": "cheesecake request did NOT silently overwrite the parve rule",
+      "after_session": 2,
+      "passed": true,
+      "detail": "pref.dessert='הקינוח תמיד פרווה'"
+    },
+    {
+      "id": "s2_two_menus",
+      "desc": "second menu saved on a new date",
+      "after_session": 2,
+      "passed": true,
+      "detail": "2 menus"
+    },
+    {
+      "id": "s2_menu_valid",
+      "desc": "new menu valid for all 4 guests, <=120 min",
+      "after_session": 2,
+      "passed": true,
+      "detail": "2026-11-06 ['s05', 'm01', 'm04', 'x02', 'd02'] issues=[]"
+    },
+    {
+      "id": "s2_menu_has_michal",
+      "desc": "Michal is on the new menu's guest list",
+      "after_session": 2,
+      "passed": true,
+      "detail": "guests=['נועה', 'יוסי', 'דני', 'מיכל']"
+    },
+    {
+      "id": "s2_main_differs",
+      "desc": "main dish differs from last week",
+      "after_session": 2,
+      "passed": true,
+      "detail": "prev main=m03 last main=m01"
+    },
+    {
+      "id": "s2_dessert_parve",
+      "desc": "saved dessert is parve despite the cheesecake request",
+      "after_session": 2,
+      "passed": true,
+      "detail": "dessert=[('d02', 'parve')]"
+    },
+    {
+      "id": "s2_conflict_explained",
+      "desc": "turn 7 answer explains the conflict",
+      "after_session": 2,
+      "passed": true,
+      "detail": "לא הכנסתי עוגת גבינה: היא חלבית, וזה מתנגש בכלל שלך שהקינוח תמיד פרווה וגם בארוח"
+    }
+  ],
+  "turns": [
+    {
+      "session": 1,
+      "turn": 1,
+      "prompt": "היי! ביום שישי הקרוב אני מארחת לארוחת שבת את נועה (טבעונית), אבא שלי יוסי (אלרגי לאגוזים) ודני. תשמור את האורחים בבקשה.",
+      "tokens": {
+        "input": 4,
+        "cache_read": 3416,
+        "cache_write": 3873,
+        "output": 449
+      },
+      "model_calls": 2,
+      "tools": [
+        "save_guest",
+        "save_guest",
+        "save_guest"
+      ],
+      "cost_usd": 0.029044,
+      "seconds": 6.48,
+      "answer": "שמרתי את שלושת האורחים 😊\n- **נועה**: טבעונית\n- **יוסי** (אבא שלך): אלרגי לאגוזים\n- **דני**: לא נשמרו הגבלות\n\nאם לדני יש הגבלה או משהו שהוא לא אוהב, תגידי לי ואעדכן.\nרוצה שאבנה תפריט לשישי, 30.10? כדאי גם לספר לי כמה זמן הכנה יש לך ואם תרצי ארוחה בשרית או חלבית.",
+      "sdk_reported_cost_usd": 0.0409349,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 4,
+          "outputTokens": 449,
+          "cacheReadInputTokens": 3416,
+          "cacheCreationInputTokens": 3873,
+          "webSearchRequests": 0,
+          "costUSD": 0.040663200000000004,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 0,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 264,
+          "canonicalModel": "claude-haiku-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    },
+    {
+      "session": 1,
+      "turn": 2,
+      "prompt": "כמה דברים שחשוב לי שתזכור לתמיד: אני לא מכינה מנות שלוקחות יותר מ-90 דקות, הקינוח אצלי תמיד פרווה, ואם צפוי גשם אוכלים בפנים ולא במרפסת.",
+      "tokens": {
+        "input": 4,
+        "cache_read": 8089,
+        "cache_write": 802,
+        "output": 450
+      },
+      "model_calls": 2,
+      "tools": [
+        "remember",
+        "remember",
+        "remember"
+      ],
+      "cost_usd": 0.014644,
+      "seconds": 5.67,
+      "answer": "שמרתי את שלושת הכללים, ואשמור עליהם מעכשיו בכל תכנון 📝\n- **זמן הכנה**: עד 90 דקות למנה\n- **קינוח**: תמיד פרווה\n- **גשם**: אם צפוי גשם, אוכלים בפנים ולא במרפסת\n\nרוצה שאבדוק את תחזית יום שישי בגבעת שמואל ואבנה תפריט לנועה, יוסי ודני?",
+      "sdk_reported_cost_usd": 0.0579847,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 8,
+          "outputTokens": 899,
+          "cacheReadInputTokens": 11505,
+          "cacheCreationInputTokens": 4675,
+          "webSearchRequests": 0,
+          "costUSD": 0.057713,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 0,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 264,
+          "canonicalModel": "claude-haiku-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    },
+    {
+      "session": 1,
+      "turn": 3,
+      "prompt": "תציע לי תפריט לשישי הקרוב: מנה ראשונה, עיקרית, תוספת וקינוח, שיתאים לכולם. אם הכול תקין, תשמור אותו.",
+      "tokens": {
+        "input": 8,
+        "cache_read": 23100,
+        "cache_write": 2509,
+        "output": 1560
+      },
+      "model_calls": 4,
+      "tools": [
+        "search_recipes",
+        "search_recipes",
+        "search_recipes",
+        "search_recipes",
+        "search_recipes",
+        "check_menu",
+        "save_menu"
+      ],
+      "cost_usd": 0.048397,
+      "seconds": 15.86,
+      "answer": "התפריט לשישי, 30.10, עבר את הבדיקה ושמרתי אותו 🍽️\n- **ראשונה:** חציל קלוי בטחינה (50 דק׳)\n- **עיקרית:** פרגיות בסילאן ושומשום (40 דק׳), ובשביל נועה גם קציצות עדשים ברוטב עגבניות (55 דק׳)\n- **תוספת:** בטטה צלויה בזעתר (40 דק׳)\n- **קינוח:** תפוחים אפויים בקינמון, פרווה (45 דק׳)\n\nזו ארוחה בשרית. כל המנות בלי אגוזים, ובכל מנה יש לנועה משהו טבעוני. אף מנה לא עוברת 90 דקות הכנה.\nרוצה שאבדוק את התחזית כדי לדעת אם אוכלים במרפסת או בפנים?",
+      "sdk_reported_cost_usd": 0.1139087,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 16,
+          "outputTokens": 2459,
+          "cacheReadInputTokens": 34605,
+          "cacheCreationInputTokens": 7184,
+          "webSearchRequests": 0,
+          "costUSD": 0.113637,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 95,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 264,
+          "canonicalModel": "claude-haiku-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    },
+    {
+      "session": 1,
+      "turn": 4,
+      "prompt": "מתי כניסת שבת השבוע בגבעת שמואל, ומה מזג האוויר הצפוי בערב? לפי זה תגיד לי איפה לערוך את השולחן.",
+      "tokens": {
+        "input": 4,
+        "cache_read": 14806,
+        "cache_write": 625,
+        "output": 351
+      },
+      "model_calls": 2,
+      "tools": [
+        "shabbat_info"
+      ],
+      "cost_usd": 0.013122,
+      "seconds": 7.59,
+      "answer": "הנה שבת **פרשת וירא** בגבעת שמואל, 30.10 🕯️\n- **הדלקת נרות:** 16:32\n- **צאת שבת:** 17:29 (תאריך היציאה לא הופיע בתוצאה)\n- **מזג אוויר בערב:** 21°C, 46% סיכוי לגשם\n\nכמעט חצי סיכוי לגשם זה מספיק כדי להפעיל את הכלל שלך, אז הייתי עורך את השולחן **בפנים** ולא במרפסת.\nאם תרצי, אבדוק שוב את התחזית ביום חמישי.",
+      "sdk_reported_cost_usd": 0.1289059,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 20,
+          "outputTokens": 2810,
+          "cacheReadInputTokens": 49411,
+          "cacheCreationInputTokens": 7809,
+          "webSearchRequests": 0,
+          "costUSD": 0.1286342,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 133,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 264,
+          "canonicalModel": "claude-haiku-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    },
+    {
+      "session": 2,
+      "turn": 5,
+      "prompt": "חזרתי! בשישי שאחריו (שבוע הבא) מגיעים שוב אותם אורחים, ומצטרפת גם מיכל, שאוכלת ללא גלוטן. מה הגשתי בפעם הקודמת? לא בא לי לחזור על אותה עיקרית.",
+      "tokens": {
+        "input": 6,
+        "cache_read": 25393,
+        "cache_write": 1640,
+        "output": 919
+      },
+      "model_calls": 3,
+      "tools": [
+        "save_guest",
+        "past_menus",
+        "check_menu"
+      ],
+      "cost_usd": 0.031683,
+      "seconds": 12.22,
+      "answer": "ברוכה השבה! שמרתי את **מיכל**: ללא גלוטן 😊\nבפעם הקודמת (30.10) הגשת חציל קלוי בטחינה, פרגיות בסילאן ושומשום ולצידן קציצות עדשים, בטטה צלויה בזעתר ותפוחים אפויים בקינמון.\n\nהכנתי הצעה ל-6.11 עם עיקריות חדשות. היא עברה בדיקה לכל ארבעת האורחים, לפי הכללים שלך:\n- **ראשונה:** מרק עדשים כתומות\n- **עיקרית:** עוף בתנור עם תפוחי אדמה ורוזמרין (85 דק׳), ובשביל נועה גם מקלובה ירקות (80 דק׳)\n- **תוספת:** שעועית ירוקה בשום\n- **קינוח:** סלט פירות העונה, פרווה\n\nכל המנות בלי גלוטן ובלי אגוזים, ובכל מנה יש לנועה משהו טבעוני. לשמור את התפריט?",
+      "sdk_reported_cost_usd": 0.16550849999999998,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 26,
+          "outputTokens": 3729,
+          "thinkingTokens": 377,
+          "cacheReadInputTokens": 74804,
+          "cacheCreationInputTokens": 9449,
+          "webSearchRequests": 0,
+          "costUSD": 0.1652368,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "thinkingTokens": 264,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000
+        }
+      }
+    },
+    {
+      "session": 2,
+      "turn": 6,
+      "prompt": "עדכון חשוב: נועה כבר לא טבעונית, היא צמחונית ואוכלת גבינות וביצים. וגם, מעכשיו מגבלת זמן ההכנה שלי היא 120 דקות ולא 90.",
+      "tokens": {
+        "input": 4,
+        "cache_read": 19416,
+        "cache_write": 905,
+        "output": 473
+      },
+      "model_calls": 2,
+      "tools": [
+        "save_guest",
+        "remember"
+      ],
+      "cost_usd": 0.017884,
+      "seconds": 6.31,
+      "answer": "עדכנתי את שני הדברים ✅\n- **נועה:** עכשיו צמחונית שאוכלת גבינות וביצים, ולא טבעונית.\n- **זמן הכנה:** המגבלה החדשה היא 120 דקות, במקום 90.\n\nהתפריט שהצעתי ל-6.11 מתאים גם עכשיו. אם תרצי, אחפש מנות חדשות שעד עכשיו לא נכנסו, כמו מנות עד 120 דקות או מנות צמחוניות עם ביצים. בגלל העוף הארוחה תישאר בשרית, אז גבינות לא ייכנסו. לשמור את התפריט כמו שהוא, או לחפש אפשרויות חדשות?",
+      "sdk_reported_cost_usd": 0.1861077,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 30,
+          "outputTokens": 4202,
+          "thinkingTokens": 377,
+          "cacheReadInputTokens": 94220,
+          "cacheCreationInputTokens": 10354,
+          "webSearchRequests": 0,
+          "costUSD": 0.185836,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "thinkingTokens": 264,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000
+        }
+      }
+    },
+    {
+      "session": 2,
+      "turn": 7,
+      "prompt": "עכשיו תבנה ותשמור את התפריט לשבוע הבא. ולקינוח אני רוצה עוגת גבינה אפויה!",
+      "tokens": {
+        "input": 8,
+        "cache_read": 44360,
+        "cache_write": 1910,
+        "output": 1519
+      },
+      "model_calls": 4,
+      "tools": [
+        "search_recipes",
+        "search_recipes",
+        "check_menu",
+        "save_menu"
+      ],
+      "cost_usd": 0.048834,
+      "seconds": 17.23,
+      "answer": "לא הכנסתי עוגת גבינה: היא חלבית, וזה מתנגש בכלל שלך שהקינוח תמיד פרווה וגם בארוחה הבשרית. היא גם לא ללא גלוטן, אז מיכל לא הייתה יכולה לאכול ממנה. במקומה בחרתי **עוגת שוקולד פרווה בלי קמח**, ושמרתי את התפריט ל-6.11 🍫\n- **ראשונה:** מרק עדשים כתומות\n- **עיקרית:** עוף בתנור עם תפוחי אדמה ורוזמרין, ובשביל נועה גם מקלובה ירקות\n- **תוספת:** שעועית ירוקה בשום\n- **קינוח:** עוגת שוקולד פרווה בלי קמח (50 דק׳)\n\nהתפריט עבר בדיקה לכל ארבעת האורחים, וכל מנה לוקחת עד 120 דקות הכנה. אם הכלל של הקינוח השתנה או שאת מעדיפה קינוח פרווה אחר, תגידי לי ואעדכן.",
+      "sdk_reported_cost_usd": 0.2406717,
+      "session_id": "d4948341-f511-4cf4-a86f-19a4d53df5f0",
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 38,
+          "outputTokens": 5721,
+          "thinkingTokens": 698,
+          "cacheReadInputTokens": 138580,
+          "cacheCreationInputTokens": 12264,
+          "webSearchRequests": 0,
+          "costUSD": 0.2404,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        },
+        "claude-haiku-5-5": {
+          "inputTokens": 1272,
+          "outputTokens": 289,
+          "thinkingTokens": 264,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0002717,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000
+        }
+      }
+    }
+  ],
+  "loc": {
+    "loop": 5,
+    "tools": 23,
+    "history": 7,
+    "memory": 36,
+    "context": 4,
+    "compaction": 0,
+    "caching": 0,
+    "tokens": 5
+  }
+}
